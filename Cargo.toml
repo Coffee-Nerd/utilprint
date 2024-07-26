@@ -1,17 +1,19 @@
 [package]
-name = "terminal_print"
-version = "0.1.0"
+name = "utilprint"
+version = "0.1.1"
 edition = "2021"
+authors = ["Jeff <rpgplayers.inc@gmail.com>"]
+description = "A utility crate for easily using colors or unicode in your terminal printing"
+license = "MIT"
+repository = "https://github.com/Coffee-Nerd/utilprint"
+homepage = "https://github.com/Coffee-Nerd/utilprint"
+documentation = "https://docs.rs/utilprint"
+readme = "README.md"
+license-file = "LICENSE"
 
 [dependencies]
 lazy_static = "1.4.0"
-lru = "0.12.3"
-# Other dependencies here
 
-[dev-dependencies]
-criterion = "0.5.1"
-
-
-[[bench]]
-name = "benchmark"
-harness = false
+[lib]
+name = "utilprint"
+path = "src/lib.rs"
