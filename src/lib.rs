@@ -91,8 +91,10 @@ fn parse_unicode_code(code: &str) -> Option<char> {
     u32::from_str_radix(code, 16).ok().and_then(char::from_u32)
 }
 
-pub fn utilprint(text: &str) -> Result<(), String> {
-    COLOR_CODES.utilprint(text)
+pub fn utilprint(text: &str) {
+    if let Err(e) = COLOR_CODES.utilprint(text) {
+        eprintln!("Error printing text: {}", e);
+    }
 }
 
 fn preprocess_text(s: &str) -> String {
@@ -158,7 +160,7 @@ pub fn print_help() {
         let visible_line_length = visible_length(&preprocess_text(line));
         let padding = max_visible_length - visible_line_length;
         let formatted_line = format!("║ {}{} ║", line, " ".repeat(padding));
-        utilprint(&formatted_line).expect("Failed to print");
+        utilprint(&formatted_line);
     }
     println!("╚{}╝", horizontal_border);
 }
