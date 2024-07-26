@@ -1,7 +1,7 @@
+use lazy_static::lazy_static;
+use std::char;
 use std::collections::HashMap;
 use std::fmt::Write;
-use std::char;
-use lazy_static::lazy_static;
 
 pub struct ColorCodes {
     codes: HashMap<String, String>,
@@ -14,18 +14,23 @@ lazy_static! {
 impl ColorCodes {
     pub fn new() -> Self {
         let color_pairs = vec![
-            // Standard colors
-            ("@d", "\x1b[30m"), ("@r", "\x1b[31m"), // Black, Red
-            ("@g", "\x1b[32m"), ("@y", "\x1b[33m"), // Green, Yellow
-            ("@b", "\x1b[34m"), ("@m", "\x1b[35m"), // Blue, Magenta
-            ("@c", "\x1b[36m"), ("@w", "\x1b[37m"), // Cyan, White
-            // Bright colors
-            ("@D", "\x1b[90m"), ("@R", "\x1b[91m"), // Bright black (gray), Bright red
-            ("@G", "\x1b[92m"), ("@Y", "\x1b[93m"), // Bright green, Bright yellow
-            ("@B", "\x1b[94m"), ("@M", "\x1b[95m"), // Bright blue, Bright magenta
-            ("@C", "\x1b[96m"), ("@W", "\x1b[97m"), // Bright cyan, Bright white
-            // Reset color
-            ("@u", "\x1b[0m"), // Reset
+            ("@d", "\x1b[30m"),
+            ("@r", "\x1b[31m"),
+            ("@g", "\x1b[32m"),
+            ("@y", "\x1b[33m"),
+            ("@b", "\x1b[34m"),
+            ("@m", "\x1b[35m"),
+            ("@c", "\x1b[36m"),
+            ("@w", "\x1b[37m"),
+            ("@D", "\x1b[90m"),
+            ("@R", "\x1b[91m"),
+            ("@G", "\x1b[92m"),
+            ("@Y", "\x1b[93m"),
+            ("@B", "\x1b[94m"),
+            ("@M", "\x1b[95m"),
+            ("@C", "\x1b[96m"),
+            ("@W", "\x1b[97m"),
+            ("@u", "\x1b[0m"),
         ];
 
         let mut codes = HashMap::with_capacity(color_pairs.len() + 256);
@@ -33,7 +38,6 @@ impl ColorCodes {
             codes.insert(code.to_string(), ansi_code.to_string());
         }
 
-        // Add xterm 256 color codes
         for i in 0..256 {
             codes.insert(format!("@x{:03}", i), format!("\x1b[38;5;{}m", i));
         }
@@ -47,13 +51,17 @@ impl ColorCodes {
 
         while let Some(start) = text[current_index..].find(|c| c == '@' || c == '#') {
             let (end, code) = self.get_code(&text[current_index + start..]);
-            write!(output, "{}{}", &text[current_index..current_index + start], code)
-                .map_err(|e| e.to_string())?;
+            write!(
+                output,
+                "{}{}",
+                &text[current_index..current_index + start],
+                code
+            )
+            .map_err(|e| e.to_string())?;
             current_index += start + end;
         }
 
-        write!(output, "{}\x1b[0m", &text[current_index..])
-            .map_err(|e| e.to_string())?;
+        write!(output, "{}\x1b[0m", &text[current_index..]).map_err(|e| e.to_string())?;
         println!("{}", output);
         Ok(())
     }
@@ -63,14 +71,17 @@ impl ColorCodes {
             return (2, color.clone());
         }
         if text.starts_with("@@") || text.starts_with("##") {
-            return (2, text[1..2].to_string()); // Escape sequence
+            return (2, text[1..2].to_string());
         }
 
         if text.starts_with("@x") && text.len() >= 5 {
             return (5, self.codes.get(&text[..5]).cloned().unwrap_or_default());
         }
         if text.starts_with('#') && text.len() >= 5 {
-            return (5, parse_unicode_code(&text[1..5]).map_or_else(String::new, |c| c.to_string()));
+            return (
+                5,
+                parse_unicode_code(&text[1..5]).map_or_else(String::new, |c| c.to_string()),
+            );
         }
         (2, String::new())
     }
@@ -84,42 +95,31 @@ pub fn utilprint(text: &str) -> Result<(), String> {
     COLOR_CODES.utilprint(text)
 }
 
-// PRINT_HELP SECTION //
-
 fn preprocess_text(s: &str) -> String {
     let mut result = String::new();
     let mut current_index = 0;
 
     while let Some(start) = s[current_index..].find(|c| c == '@' || c == '#') {
-        result.push_str(&s[current_index..current_index + start]); // Add text before code
+        result.push_str(&s[current_index..current_index + start]);
 
         let (end, code_type) = COLOR_CODES.get_code(&s[current_index + start..]);
 
-        // Handle code types separately
         match code_type {
-            // Escaped color code (@@): Already handled correctly
-            _ if code_type.is_empty() => (), // Invalid code - ignore
-
-            // Color code (@): No replacement needed
-            _ if code_type.starts_with("\x1b") => (), 
-
-            // Unicode character (#): Replace with a single space
-            _ => result.push(' '),  
+            _ if code_type.is_empty() => (),
+            _ if code_type.starts_with("\x1b") => (),
+            _ => result.push(' '),
         }
 
         current_index += start + end;
     }
 
-    result.push_str(&s[current_index..]); // Add remaining text
+    result.push_str(&s[current_index..]);
     result
 }
 
-
 fn visible_length(s: &str) -> usize {
-    preprocess_text(s).chars().count() 
+    preprocess_text(s).chars().count()
 }
-
-
 
 pub fn print_help() {
     let help_text = vec![
@@ -157,17 +157,12 @@ pub fn print_help() {
     for line in help_text.iter() {
         let visible_line_length = visible_length(&preprocess_text(line));
         let padding = max_visible_length - visible_line_length;
-        let formatted_line = format!(
-            "║ {}{} ║",
-            line,
-            " ".repeat(padding)
-        );
+        let formatted_line = format!("║ {}{} ║", line, " ".repeat(padding));
         utilprint(&formatted_line).expect("Failed to print");
     }
     println!("╚{}╝", horizontal_border);
 }
 
-// TESTS //
 #[cfg(test)]
 mod tests {
     use super::*;
