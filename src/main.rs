@@ -1,5 +1,5 @@
 use utilprint::*;
 fn main() {
-    let _ = utilprint("@x238[@RDE@x202MO@x208NC@x214RA@x220F@x228T@x238] @x196R@x202a@x208i@x214n@x220b@x226o@x046w Text, a #2615, a @uEuro #20AC @Rs@ry@Rm@rb@Ro@rl @u, and @Mp@mu@Mr@mp@Ml@me @Mt@me@Mx@mt");
+    utilprint("@x226He@x190ll@x155o @x119W@x120or@x084l@x085d, @x050t@x051his @x045is@x075 U@x069t@x105il@x099P@x135ri@x165nt@x201, let@x200's m@x205ake t@x204he@x210 w@x209or@x215ld co@x220lorf@x226ul!@w Here is a #2615, @ua Euro #20AC @Rs@ry@Rm@rb@Ro@rl@u, @Mand p@mu@Mr@mp@Ml@me @Mt@me@Mx@mt");
     print_help();
 }
