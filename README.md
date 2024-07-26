@@ -28,7 +28,7 @@ Add `utilprint` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-utilprint = "0.1.2"
+utilprint = "0.1.3"
 ```
 
 Usage
@@ -38,11 +38,13 @@ Here's a quick example of how to use UtilPrint to add color and an emoji to your
 use utilprint::utilprint;
 
 fn main() {
-    utilprint("@rHello, @bworld! #1F600");
+    utilprint("@x226He@x190ll@x155o @x119W@x120or@x084l@x085d, @x050t@x051his @x045is@x075 U@x069t@x105il@x099P@x135ri@x165nt@x201, let@x200's m@x205ake t@x204he@x210 w@x209or@x215ld co@x220lorf@x226ul!@w Here is a #2615, @ua Euro #20AC @Rs@ry@Rm@rb@Ro@rl@u, @Mand p@mu@Mr@mp@Ml@me @Mt@me@Mx@mt");
 }
 ```
 
-This will print "Hello, world!" with "Hello" in red, "world" in blue, and a smiley face emoji at the end.
+This will print Hello World, this is UtilPrint, let's make the world Colorful!
+In rainbow colors, and then it includes more text in different colors, and some unicode characters, like an emoji.
+Here is a ☕, a Euro € symbol, and purple text
 
 **Color Codes**
 
