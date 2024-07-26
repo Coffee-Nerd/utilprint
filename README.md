@@ -28,7 +28,7 @@ Add `utilprint` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-utilprint = "0.1.1"
+utilprint = "0.1.2"
 ```
 
 Usage
