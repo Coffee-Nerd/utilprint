@@ -9,11 +9,7 @@ UtilPrint is a minimalist Rust crate designed to simplify the process of adding 
 It provides a fast and easy-to-use interface for enhancing your console applications with visually appealing elements.
 This is how it looks in a few different terminals. The aesthetics will depend on your terminal settings and support.
 
-<p align="center">
-  <img src="https://github.com/Coffee-Nerd/utilprint/assets/126441228/78c3badc-7e6b-4409-909e-9964f8c17475" alt="240318_14h00m37s_screenshot" width="32%">
-  <img src="https://github.com/Coffee-Nerd/utilprint/assets/126441228/b150c535-43fc-4427-8f7a-7a60418006a2" alt="240318_14h01m02s_screenshot" width="32%">
-  <img src="https://github.com/Coffee-Nerd/utilprint/assets/126441228/c4b98697-3908-4895-ad0d-a38a2dfe8375" alt="240318_14h01m27s_screenshot" width="32%">
-</p>
+![240727_00h54m57s_screenshot](https://github.com/user-attachments/assets/a9704b4b-9a14-44d8-a676-152171b9a092)
 
 ## Features
 
