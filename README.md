@@ -4,7 +4,7 @@
 [![Documentation](https://docs.rs/utilprint/badge.svg)](https://docs.rs/utilprint)
 [![License](https://img.shields.io/crates/l/utilprint.svg)](https://github.com/coffee-nerd/utilprint/blob/main/LICENSE)
 
-UtilPrint is a minimalist Rust crate designed to simplify the process of adding color and Unicode characters, such as emojis, to your terminal output. 
+UtilPrint is a minimalist Rust crate designed to simplify the process of adding color and Unicode characters, such as emojis, to your terminal output.
 
 It provides a fast and easy-to-use interface for enhancing your console applications with visually appealing elements.
 This is how it looks in a few different terminals. The aesthetics will depend on your terminal settings and support.
@@ -28,23 +28,21 @@ Add `utilprint` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-utilprint = "0.1.0"
+utilprint = "0.1.1"
 ```
 
 Usage
 Here's a quick example of how to use UtilPrint to add color and an emoji to your terminal output:
 
-
 ```rust
 use utilprint::utilprint;
 
 fn main() {
-    utilprint("@rHello, @bworld! #1F600").unwrap();
+    utilprint("@rHello, @bworld! #1F600");
 }
 ```
-This will print "Hello, world!" with "Hello" in red, "world" in blue, and a smiley face emoji at the end.
 
-If you're sure that your utilprint function will not fail, or if you're just writing a quick example, you can omit the .unwrap() for simplicity. Just keep in mind that if an error does occur, the program will fail silently without any indication of what went wrong.
+This will print "Hello, world!" with "Hello" in red, "world" in blue, and a smiley face emoji at the end.
 
 **Color Codes**
 
@@ -80,4 +78,4 @@ Contributions are welcome! Please feel free to submit pull requests, report bugs
 
 **License**
 
-UtilPrint is licensed under the MIT License. Have fun using or modifying it!
+UtilPrint is licensed under the MIT License. Have fun using or modifying it! If you want to credit me, that would be great!
