@@ -6,5 +6,5 @@ fn main() {
     utilprint("I really like rainbows, they are beautiful and awesome!".rainbow());
     utilprint("Whatever it is, I hope it's something you love.".lover());
     utilprint("This should be red!".red());
-    utilprint("I love to drink #2615 every single day, because it makes me #263A #2705".lover())
+    utilprint("I love to drink #2615 every single day, because it makes me #263A #2705");
 }
