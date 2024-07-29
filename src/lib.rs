@@ -91,8 +91,8 @@ fn parse_unicode_code(code: &str) -> Option<char> {
     u32::from_str_radix(code, 16).ok().and_then(char::from_u32)
 }
 
-pub fn utilprint(text: &str) {
-    if let Err(e) = COLOR_CODES.utilprint(text) {
+pub fn utilprint(text: impl AsRef<str>) {
+    if let Err(e) = COLOR_CODES.utilprint(text.as_ref()) {
         eprintln!("Error printing text: {}", e);
     }
 }
@@ -165,6 +165,60 @@ pub fn print_help() {
     println!("╚{}╝", horizontal_border);
 }
 
+pub trait TextEffects {
+    fn pastelbow(&self) -> String;
+    fn rainbow(&self) -> String;
+    fn lover(&self) -> String;
+    fn red(&self) -> String;
+}
+
+impl TextEffects for &str {
+    fn pastelbow(&self) -> String {
+        let colors = vec![
+            "@x226", "@x190", "@x155", "@x119", "@x120", "@x084", "@x085", "@x050", "@x051",
+            "@x045", "@x075", "@x069", "@x105", "@x099", "@x135", "@x165", "@x201", "@x200",
+            "@x205", "@x204", "@x210", "@x209", "@x215", "@x220", "@x226",
+        ];
+        let mut result = String::new();
+        for (i, c) in self.chars().enumerate() {
+            let color = &colors[i % colors.len()];
+            result.push_str(&format!("{}{}", color, c));
+        }
+        result.push_str("@u");
+        result
+    }
+
+    fn rainbow(&self) -> String {
+        let colors = vec![
+            "@x196", "@x202", "@x208", "@x214", "@x220", "@x226", "@x154", "@x082", "@x046",
+            "@x035", "@x025", "@x021", "@x020", "@x019", "@x054", "@x055", "@x091", "@x092",
+            "@x126", "@x161",
+        ];
+        let mut result = String::new();
+        for (i, c) in self.chars().enumerate() {
+            let color = &colors[i % colors.len()];
+            result.push_str(&format!("{}{}", color, c));
+        }
+        result.push_str("@u");
+        result
+    }
+
+    fn lover(&self) -> String {
+        let colors = vec!["@x218", "@x176", "@x229", "@x219", "@x153", "@x219"];
+        let mut result = String::new();
+        for (i, c) in self.chars().enumerate() {
+            let color = &colors[i % colors.len()];
+            result.push_str(&format!("{}{}", color, c));
+        }
+        result.push_str("@u");
+        result
+    }
+
+    fn red(&self) -> String {
+        format!("@r{}@u", self)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -179,5 +233,40 @@ mod tests {
     fn test_parse_unicode_code() {
         assert_eq!(parse_unicode_code("263A"), Some('☺'));
         assert_eq!(parse_unicode_code("1F602"), Some('😂'));
+    }
+
+    #[test]
+    fn test_pastelbow() {
+        let text = "Hello".pastelbow();
+        assert!(text.starts_with("@x226H"));
+        assert!(text.contains("@x190e"));
+        assert!(text.contains("@x155l"));
+        assert!(text.contains("@x119o"));
+    }
+
+    #[test]
+    fn test_rainbow() {
+        let text = "Hello World".rainbow();
+        assert!(text.contains("@x196H"));
+        assert!(text.contains("@x202e"));
+        assert!(text.contains("@x208l"));
+        assert!(text.contains("@x214l"));
+        assert!(text.contains("@x220o"));
+        assert!(text.contains("@x226 "));
+        assert!(text.contains("@x154W"));
+        assert!(text.contains("@x082o"));
+        assert!(text.contains("@x046r"));
+        assert!(text.contains("@x035l"));
+        assert!(text.contains("@x025d"));
+    }
+
+    #[test]
+    fn test_lover() {
+        let text = "Hello".lover();
+        assert!(text.contains("@x218H"));
+        assert!(text.contains("@x176e"));
+        assert!(text.contains("@x229l"));
+        assert!(text.contains("@x219l"));
+        assert!(text.contains("@x153o"));
     }
 }
