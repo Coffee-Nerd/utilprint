@@ -38,9 +38,48 @@ fn main() {
 }
 ```
 
-This will print Hello World, this is UtilPrint, let's make the world Colorful!
+This will print "Hello World, this is UtilPrint, let's make the world Colorful!"
+
 In rainbow colors, and then it includes more text in different colors, and some unicode characters, like an emoji.
 Here is a ☕, a Euro € symbol, and purple text
+
+That is a complex example, but you may think that isn't that easy to read, and you may want to use just one color, or a specific set of colors.
+For this I have implemented many different cool methods. 
+
+```rust
+utilprint("I wonder what cool things we are going to make with UtilPrint?!".pastelbow());
+```
+![image](https://github.com/user-attachments/assets/4c7159fd-1c73-43f2-8fbe-93856bc283de)
+
+As you can see, this is now printing in our custom colorset, called pastelbow!
+
+```rust
+utilprint("I really like rainbows, they are beautiful and awesome!".rainbow());
+```
+![image](https://github.com/user-attachments/assets/07efc9c4-4c39-4160-837d-de866642dcaa)
+
+This would also create a more traditional rainbow colored text!
+
+```rust
+utilprint("This should be red!".red());
+```
+![image](https://github.com/user-attachments/assets/da242adc-15e0-4ccb-bdd3-c5c4fbe30506)
+
+We can also use very simple coloration, with simply using the `.red()` method.
+
+And of course we love unicode, and emojis! 
+You can see a nice list of unicode symbols here... 
+
+https://www.compart.com/en/unicode/category/So
+
+Currently we support unicode in the form of #0000, where the four zeroes can be any combination of numbers and letters...
+
+```rust
+utilprint("I love to drink #2615 every single day, because it makes me #263A #2705");
+```
+![image](https://github.com/user-attachments/assets/e92a9b13-a1f2-480f-8d98-64d0c89aaa38)
+
+Here you can see we have our coffee, our smiley face, and our checkmark! 
 
 **Color Codes**
 
@@ -75,5 +114,12 @@ To add Unicode characters, use #NNNN where NNNN is the Unicode code. For example
 Contributions are welcome! Please feel free to submit pull requests, report bugs, or suggest new features.
 
 **License**
+
+This project uses an MIT license. Feel free to use this, but credit me!
+
+**KNOWN BUGS** 
+
+Using a method like `.rainbow()`, or any non single color method like `.red()` will result in your emojis being lost, and the unicode
+not being consumed. This is in the works to be fixed.
 
 UtilPrint is licensed under the MIT License. Have fun using or modifying it! If you want to credit me, that would be great!
