@@ -6,5 +6,7 @@ fn main() {
     utilprint("I really like rainbows, they are beautiful and awesome!".rainbow());
     utilprint("Whatever it is, I hope it's something you love.".lover());
     utilprint("This should be red!".red());
+    utilprint("Random XTERM gradient colors!".random_xterm_gradient());
+    utilprint("Random true color gradients are amazing!".random_truecolor_gradient());
     utilprint("I love to drink #2615 every single day, because it makes me #263A #2705");
 }
