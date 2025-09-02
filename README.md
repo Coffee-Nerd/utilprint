@@ -24,7 +24,7 @@ Add `utilprint` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-utilprint = "0.1.3"
+utilprint = "0.1.5"
 ```
 
 Usage
@@ -66,6 +66,18 @@ utilprint("This should be red!".red());
 ![image](https://github.com/user-attachments/assets/da242adc-15e0-4ccb-bdd3-c5c4fbe30506)
 
 We can also use very simple coloration, with simply using the `.red()` method.
+
+```rust
+utilprint("Random XTERM gradient colors!".random_xterm_gradient());
+```
+
+This creates a smooth gradient using XTERM 256 colors with random start and end colors that change each time you run it!
+
+```rust
+utilprint("Random true color gradients are amazing!".random_truecolor_gradient());
+```
+
+This creates a smooth gradient using 24-bit true colors (RGB) with random start and end colors that change each time you run it!
 
 And of course we love unicode, and emojis! 
 You can see a nice list of unicode symbols here... 
